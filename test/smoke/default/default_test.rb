@@ -50,6 +50,10 @@ end
 
 # user
 
+describe user('chef') do
+	it { should exist }
+end
+
 describe user('tomcat') do
 	it { should exist }
 	its('groups') { should include 'tomcat' }
@@ -60,4 +64,8 @@ describe file ('/etc/systemd/system/tomcat.service') do
 	it { should exist }
 end
 
-
+# sshd config
+#
+describe sshd_config do
+	its('PasswordAuthentication') { should eq 'yes' }
+end 
