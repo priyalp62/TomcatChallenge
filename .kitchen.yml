@@ -23,3 +23,4 @@ suites:
       inspec_tests:
         - test/smoke/default
     attributes:
+     tomcat-port: 8181

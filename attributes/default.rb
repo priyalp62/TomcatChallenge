@@ -1,2 +1,2 @@
 
-default['tomcat']['listenerPort'] = '6060'
+default['tomcat-port'] = '6060'

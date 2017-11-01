@@ -59,18 +59,15 @@ end
 
 # template for the tomcat server.xml file /opt/tomcat/conf/server.xml
 
-# default attr for listenerPort in attributes\default.rb and used as node attr in
-# server.xml template
+# attr for tomcat-port in attributes\default.rb and used as node attr in
+# server.xml template, and overridden by suites block in .kitchen.yml
 
 template '/opt/tomcat/conf/server.xml' do
  	source 'tomcatServerXML.erb'
-#   	variables(
-#   		:listenerPort => node['tomcat']['listenerPort']
-#   	)
    	owner 'tomcat'
    	# notifies :run, 'execute[daemonReload]',:immediately
    	notifies :restart, 'service[tomcat]',:immediately
-   end
+end
 
 # execute 'systemctl daemon-reload'
 execute 'daemonReload' do
@@ -78,9 +75,14 @@ execute 'daemonReload' do
 	# action :nothing
 end
 
+# subscribes properties for state changes on tomcat.service and server.xml
+
 service 'tomcat' do
 	action [:start, :enable]
+	subscribes :restart, 'template[/opt/tomcat/conf/server.xml]', :immediately
+	subscribes :restart, 'template[/etc/systemd/system/tomcat.service]', :immediately
 end
+
 
 
 
