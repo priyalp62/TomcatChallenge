@@ -57,9 +57,31 @@ template '/etc/systemd/system/tomcat.service' do
 	source 'tomcatService.erb'
 end
 
-execute 'systemctl daemon-reload'
+# template for the tomcat server.xml file /opt/tomcat/conf/server.xml
+
+# default attr for listenerPort in attributes\default.rb and used as node attr in
+# server.xml template
+
+template '/opt/tomcat/conf/server.xml' do
+ 	source 'tomcatServerXML.erb'
+#   	variables(
+#   		:listenerPort => node['tomcat']['listenerPort']
+#   	)
+   	owner 'tomcat'
+   	# notifies :run, 'execute[daemonReload]',:immediately
+   	notifies :restart, 'service[tomcat]',:immediately
+   end
+
+# execute 'systemctl daemon-reload'
+execute 'daemonReload' do
+	command 'systemctl daemon-reload'
+	# action :nothing
+end
 
 service 'tomcat' do
 	action [:start, :enable]
 end
+
+
+
 

@@ -17,7 +17,7 @@
 #  it { should_not be_listening }
 #end
 
-describe command('curl http://localhost:8080') do
+describe command('curl http://localhost:6060') do
 	its('stdout') { should match /Tomcat/ }
 end
 
