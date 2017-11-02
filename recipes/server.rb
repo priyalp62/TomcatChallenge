@@ -66,7 +66,6 @@ end
 
 execute 'chmod g+r /opt/tomcat/conf/*' do
  	only_if{  File.stat('/opt/tomcat/conf/server.xml').mode != '710' }
- 	node.override['confPermAllOK'] = 1
 
 end
  
