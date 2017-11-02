@@ -29,24 +29,22 @@ directory '/opt/tomcat' do
 end
 
 # link in the lab instructions is dead - I found the distribution here:
-# wget https://archive.apache.org/dist/tomcat/tomcat-8/v8.0.33/bin/apache-tomcat-8.0.33.tar.gz  
+# wget https://archive.apache.org/dist/tomcat/tomcat-8/v8.0.33/bin/apache-tomcat-8.0.33.tar.gz
 #
 # extract to /opt/tomcat
 #
 # only get the file if we don't already have it
 
-
 remote_file '/opt/tomcat/apache-tomcat-8.0.33.tar.gz' do
 	source 'https://archive.apache.org/dist/tomcat/tomcat-8/v8.0.33/bin/apache-tomcat-8.0.33.tar.gz'
- 	not_if do
+	not_if do
  		File.exist?('/opt/tomcat/apache-tomcat-8.0.33.tar.gz')
  	end
 end
 
-
-
 #
 # assume if the conf subdir exists, we've already untarred
+#
 #
 execute 'tar -xvf /opt/tomcat/apache-tomcat-8.0.33.tar.gz -C /opt/tomcat --strip-components=1' do
  	not_if do
@@ -56,7 +54,7 @@ end
 
 
 execute 'chgrp -R tomcat /opt/tomcat/conf' do
- 	only_if { (Etc.getgrgid(File.stat('/opt/tomcat/conf').gid)).name != 'tomcat' }
+ 	only_if { Etc.getgrgid(File.stat('/opt/tomcat/conf').gid).name != 'tomcat' }
 end
 
 
@@ -74,7 +72,6 @@ end
  
 execute 'chown -R tomcat /opt/tomcat/webapps/ /opt/tomcat/work/ /opt/tomcat/temp/ /opt/tomcat/logs' do
  	only_if { Etc.getpwuid(File.stat('/opt/tomcat/webapps').uid).name != 'tomcat' }
-	#node.override['dirOwnersOK'] = 1
 end
 
 

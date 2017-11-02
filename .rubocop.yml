@@ -1,0 +1,6 @@
+AllCops:
+  DisabledByDefault: true
+EndOfLine:
+  Enabled: false
+Style/Tab:
+  Enabled: false

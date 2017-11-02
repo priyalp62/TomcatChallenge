@@ -5,17 +5,17 @@
 # The Inspec reference, with examples and extensive documentation, can be
 # found at http://inspec.io/docs/reference/resources/
 
-#unless os.windows?
+# unless os.windows?
   # This is an example test, replace with your own test.
 #  describe user('root'), :skip do
 #    it { should exist }
 #  end
-#end
+# end
 
 # This is an example test, replace it with your own test.
-#describe port(80), :skip do
+# describe port(80), :skip do
 #  it { should_not be_listening }
-#end
+# end
 
 describe command('curl http://localhost:8181') do
 	its('stdout') { should match /Tomcat/ }
@@ -65,7 +65,7 @@ describe file ('/etc/systemd/system/tomcat.service') do
 end
 
 # sshd config
-#
+ 
 describe sshd_config do
 	its('PasswordAuthentication') { should eq 'yes' }
-end 
+end
