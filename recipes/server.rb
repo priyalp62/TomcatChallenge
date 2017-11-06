@@ -63,7 +63,6 @@ execute 'chmod g+rwx /opt/tomcat/conf' do
 end
 
 
-# here
 execute 'chmod g+r /opt/tomcat/conf/*' do
  	# only_if{ (File.stat('/opt/tomcat/conf/server.xml').mode & 0040) != 0 }
 
