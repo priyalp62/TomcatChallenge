@@ -23,6 +23,7 @@ end
 directory '/opt/tomcat' do
 	action [:create]
 	group 'tomcat'
+  	mode '0775'
  	not_if do
  		File.exist?('/opt/tomcat')
  	end
@@ -42,30 +43,29 @@ remote_file '/opt/tomcat/apache-tomcat-8.0.33.tar.gz' do
  	end
 end
 
-#
-# assume if the conf subdir exists, we've already untarred
-#
-#
+
+ 
 execute 'tar -xvf /opt/tomcat/apache-tomcat-8.0.33.tar.gz -C /opt/tomcat --strip-components=1' do
- 	not_if do
- 		File.exist?('/opt/tomcat/conf')
- 	end
 end
 
+
+directory '/opt/tomcat/conf' do
+    	mode '0755'
+end
 
 execute 'chgrp -R tomcat /opt/tomcat/conf' do
  	only_if { Etc.getgrgid(File.stat('/opt/tomcat/conf').gid).name != 'tomcat' }
 end
 
-
 execute 'chmod g+rwx /opt/tomcat/conf' do
- 	only_if { File.stat('/opt/tomcat/conf').mode != '770' }
+  	only_if { (File.stat('/opt/tomcat/conf').mode & 0070) != 0 }
 
 end
 
 
+# here
 execute 'chmod g+r /opt/tomcat/conf/*' do
- 	only_if{  File.stat('/opt/tomcat/conf/server.xml').mode != '710' }
+ 	# only_if{ (File.stat('/opt/tomcat/conf/server.xml').mode & 0040) != 0 }
 
 end
  
@@ -74,9 +74,6 @@ execute 'chown -R tomcat /opt/tomcat/webapps/ /opt/tomcat/work/ /opt/tomcat/temp
 end
 
 
-directory '/opt/tomcat/conf' do
-  	mode '0755'
-end
 
 # template for the tomcat service file
 # sudo vi /etc/systemd/system/tomcat.service

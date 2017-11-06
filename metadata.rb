@@ -1,4 +1,4 @@
-name 'TomcatChallenge'
+name 'tomcat'
 maintainer 'Robert Statsinger'
 maintainer_email 'rstatsinger@gmail.com'
 license 'Apache-2.0'
@@ -25,5 +25,3 @@ issues_url 'https://github.com/rstatsinger/TomcatChallenge/issues'
 source_url 'https://github.com/rstatsinger/TomcatChallenge'
 
 supports 'centos'
-
-depends 'tomcat'

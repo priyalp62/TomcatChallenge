@@ -17,7 +17,8 @@
 #  it { should_not be_listening }
 # end
 
-describe command('curl http://localhost:8181') do
+# describe command('curl http://localhost:8181') do
+describe command('curl http://localhost:6060') do
 	its('stdout') { should match /Tomcat/ }
 end
 
@@ -29,21 +30,28 @@ describe group('tomcat') do
 	it { should exist }
 end
 
+
 # directories
 
 describe directory('/opt/tomcat') do
 	it { should exist }
 end
 
+# /opt/tomcat/conf will exist if apache-tomcat tar.gz has been extracted to /opt/tomcat
+
 describe directory('/opt/tomcat/conf') do
 	it { should exist }
-	its('mode') { should cmp '0755' }
+	its('group') { should eq 'tomcat' }
+	it { should be_executable.by('group') }
+	it { should be_readable.by('group') }
+	it { should be_writable.by('group') }
 end
 
 %w[ webapps work temp logs ].each do |path|
 
 	describe directory("/opt/tomcat/#{path}") do
 		it { should exist }
+		it { should be_readable.by('group') }
 		its('owner') { should eq 'tomcat' }
 	end
 end
