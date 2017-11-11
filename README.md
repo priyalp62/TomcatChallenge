@@ -23,7 +23,7 @@ Tests - There is an extensive set of tests in test/smoke/default/default_test.rb
 Templates - I generated templates for both the server.xml file and the tomcat.service file and I use :notifies to restart tomcat if they change. I also :subscribed the tomcat service to changes in these entities.
 
 Attributes - I  defined a default attribute called tomcat-port in attributes/default.rb to make the port configurable and plugged it in with a Ruby expression in the server.xml template. I initially overrode it in the .kitchen.yml for testing purposes, as requested by the instructions.
-
+cgnfgnfdgn
 Kitchen - I kitchened the heck out of this thing. The value of TDD and spinning up local test kitchens is clear.
 
 I got Foodcritic and CookStyle to see things my way, but not without some customization of .rubocop.yml :) There was a conflict between Foodcritic and the uploading of the tomcat cookbook. Foodcritic kept insisting that I specify 'depends tomcat' in the default recipe, but knife complained about a circular reference. See the discussion at https://github.com/Foodcritic/foodcritic/issues/242
