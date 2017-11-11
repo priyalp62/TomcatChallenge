@@ -6,7 +6,7 @@ Setup Summary:
 	- Workstation: Chef Development Kit Version: 2.3.4. I used Windows as my workstation, just to make it harder on myself.
 	- Server: Hosted Chef
 
-My cookbooks are at https://manage.chef.io/organizations/rstatsinger/cookbooks The tomcat cookbook version 0.1.0 is at https://manage.chef.io/organizations/rstatsinger/cookbooks/tomcat/0.1.0
+My cookbooks are at https://manage.chef.io/organizations/rstatsinger/cookbooks The tomcat cookbook version 0.1.0 is at https://manage.chef.io/organizations/rstatsinger/cookbooks/tomcat/0.1.0. Thest
 
 I started this project knowing very little about Chef. The background work I did was as follows:
 
