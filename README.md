@@ -17,7 +17,7 @@ I started this project knowing very little about Chef. The background work I did
 
 Implementation Notes:
 
-Guards for idempotency to maintain Chef's 'test and repair' philosophy - I heavily researched Ruby methods for Etc and File - hopefully the expressions are behaving as I expect.
+Guards for idempotency to maintain Chef's 'test and repair' philosophy - I  researched Ruby methods for Etc and File - hopefully the expressions are behaving as I expect.
 
 Tests - There is an extensive set of tests in test/smoke/default/default_test.rb
 
