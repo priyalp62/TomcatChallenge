@@ -34,5 +34,4 @@ Other notes:
 VirtualBox 5.1 and Vagrant 2.0 were a recipe for 'kitchen create' failure. Vagrant 2 kept replacing the ssh keys and killing ssh access to the kitchen. Downgrading to VirtualBox 5 and Vagrant 1.8.4 solved the problem. The VirtualBox downgrade was required to maintain compatibility with the 
 downgraded Vagrant
 
-I have also placed the Users cookbook at https://github.com/rstatsinger/TomcatUsers. Initially I did most of the work for this cookbook in the tomcat cookbook but I've factored it out. The instructions did not specify any dependencies between the two cookbooks. I experimented with writing a wrapper cookbook for the two but I want to submit this project tonight. Time kills all deals.
-
+I have also placed the Users cookbook at https://github.com/rstatsinger/TomcatUsers. Initially I did most of the work for this cookbook in the tomcat cookbook but I've factored it out. The instructions did not specify any dependencies between the two cookbooks. 
